@@ -1,0 +1,37 @@
+app:
+  file:
+    max-size: 5242880 # 5МБ
+    allowed-extensions: xls, xlsx
+
+server:
+  port: 8081
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: passworDarito
+    key-store-type: PKCS12
+    key-alias: firestarter
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    topics:
+      upload: "upload-topic"
+      status: "status-topic"
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: firestarter_db
+
+  cloud:
+    config:
+      uri: http://localhost:8888
+      profile: local
+
+logging:
+  level:
+    org.springframework.kafka: DEBUG

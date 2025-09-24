@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: file-uploader
+  profiles:
+    active: local
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: false
+

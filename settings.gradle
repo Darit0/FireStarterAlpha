@@ -1,0 +1,6 @@
+rootProject.name = 'Firestarter'
+
+include 'config-server'
+include 'file-uploader'
+include 'file-processor'
+include 'file-status-processor'

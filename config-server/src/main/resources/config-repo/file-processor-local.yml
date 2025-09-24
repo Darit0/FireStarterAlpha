@@ -1,0 +1,18 @@
+server:
+  port: 8082
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: file-processor-group
+      auto-offset-reset: earliest
+    topics:
+      upload: "upload-topic"
+      status: "status-topic"
+
+logging:
+  level:
+    org.springframework.kafka: DEBUG
