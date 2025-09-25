@@ -6,6 +6,9 @@ import interntask.filestatusprocessor.service.FileStatusUpdateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,7 +25,8 @@ public class StatusTopicListener {
     }
 
     @KafkaListener(topics = "${kafka.topics.status:status-topic}", groupId = "file-status-processor-group")
-    public void listen(String fileHash, String jsonMessage) {
+    public void listen(@Payload String jsonMessage,
+                       @Header(KafkaHeaders.RECEIVED_KEY) String fileHash) {
         log.info("Received status update for file {}: {}", fileHash, jsonMessage);
 
         try {
