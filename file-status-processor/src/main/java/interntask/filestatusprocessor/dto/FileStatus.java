@@ -1,4 +1,4 @@
-package interntask.fileuploader.dto;
+package interntask.filestatusprocessor.dto;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

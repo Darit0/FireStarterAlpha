@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.4'
 	id 'java'
+	id 'jacoco'
 }
 
 group = 'InternTask'
@@ -10,6 +11,23 @@ description = 'file-uploader'
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
+}
+
+// Мб для отчета в gitActions
+jacoco {
+	toolVersion = "0.8.11"
+}
+
+jacocoTestReport {
+	dependsOn test
+	reports {
+		xml.required = true
+		html.required = true
+	}
+}
+
+test {
+	finalizedBy jacocoTestReport
 }
 
 repositories {
@@ -33,10 +51,12 @@ dependencies {
 	implementation 'org.apache.poi:poi-ooxml:5.2.5'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 	testImplementation 'org.springframework.kafka:spring-kafka-test'
 	testImplementation 'org.testcontainers:testcontainers:1.19.7'
 	testImplementation 'org.testcontainers:junit-jupiter:1.19.7'
 	testImplementation 'org.testcontainers:mongodb:1.19.7'
+	testImplementation 'org.testcontainers:kafka:1.19.7'
 }
 
 dependencyManagement {

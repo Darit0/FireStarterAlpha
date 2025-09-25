@@ -1,6 +1,7 @@
 package interntask.filestatusprocessor.repository;
 
-import interntask.fileuploader.dto.FileStatus;
+
+import interntask.filestatusprocessor.dto.FileStatus;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
