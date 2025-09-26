@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,7 +31,8 @@ public class UploadTopicListener {
     }
 
     @KafkaListener(topics = "${kafka.topics.upload:upload-topic}", groupId = "file-processor-group")
-    public void listen(String fileHash, byte[] fileContent) {
+    public void listen(@Payload byte[] fileContent,
+                       @Header(KafkaHeaders.RECEIVED_KEY) String fileHash) {
         log.info("Processing file with hash: {}", fileHash);
 
         try {

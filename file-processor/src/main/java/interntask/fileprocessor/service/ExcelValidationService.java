@@ -8,6 +8,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -15,7 +16,7 @@ import java.io.InputStream;
 public class ExcelValidationService {
 
     public boolean validateFirstSheet(byte[] fileContent) {
-        try (InputStream is = new java.io.ByteArrayInputStream(fileContent)) {
+        try (InputStream is = new ByteArrayInputStream(fileContent)) {
             Workbook workbook = detectWorkbook(is);
             Sheet sheet = workbook.getSheetAt(0);
 

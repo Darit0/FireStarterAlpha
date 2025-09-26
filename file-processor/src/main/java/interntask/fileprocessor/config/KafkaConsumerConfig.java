@@ -1,13 +1,14 @@
 package interntask.fileprocessor.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
-import org.springframework.kafka.core.ConsumerFactory;
-import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.core.*;
 import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 
 import java.util.HashMap;
@@ -39,18 +40,16 @@ public class KafkaConsumerConfig {
 
     // Для отправки статусов (String)
     @Bean
-    public org.springframework.kafka.core.ProducerFactory<String, String> statusProducerFactory() {
+    public ProducerFactory<String, String> statusProducerFactory() {
         Map<String, Object> props = new HashMap<>();
-        props.put(org.apache.kafka.clients.producer.ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.put(org.apache.kafka.clients.producer.ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-                org.apache.kafka.common.serialization.StringSerializer.class);
-        props.put(org.apache.kafka.clients.producer.ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                org.apache.kafka.common.serialization.StringSerializer.class);
-        return new org.springframework.kafka.core.DefaultKafkaProducerFactory<>(props);
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        return new DefaultKafkaProducerFactory<>(props);
     }
 
     @Bean
-    public org.springframework.kafka.core.KafkaTemplate<String, String> statusKafkaTemplate() {
-        return new org.springframework.kafka.core.KafkaTemplate<>(statusProducerFactory());
+    public KafkaTemplate<String, String> statusKafkaTemplate() {
+        return new KafkaTemplate<>(statusProducerFactory());
     }
 }
