@@ -46,11 +46,12 @@ https://www.postman.com/daritoss/interntask/collection/w6e3ol3/firestartertests?
 ## Альтернативный варинт проверки эндпоинтов
 Загрузка файла
 ```bash
-curl -k -X POST https://localhost:8080/upload \
+curl -k -X POST https://localhost:8081/upload \
   -F "file=@test.xlsx" \
   -v
 ```
 Проверка статуса файла
 ```bash
-curl -k https://localhost:8080/status/ваш_хеш_файла
+curl -k https://localhost:8081/status/ваш_хеш_файла
 ```
+
