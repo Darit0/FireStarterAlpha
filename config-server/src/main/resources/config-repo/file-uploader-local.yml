@@ -29,6 +29,11 @@ spring:
       uri: http://localhost:8888
       profile: local
 
+  servlet:
+    multipart:
+      max-file-size: 10MB    # Максимальный размер одного файла
+      max-request-size: 10MB # Максимальный размер всего запроса
+
 logging:
   level:
     org.springframework.kafka: DEBUG
