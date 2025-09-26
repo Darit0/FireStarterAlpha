@@ -40,7 +40,7 @@ docker-compose up -d
 ./gradlew :file-status-processor:bootRun
 ```
 
-## Для проверки работы мини-колллекция Postamn
+## Для проверки работы мини-колллекция Postman
 https://www.postman.com/daritoss/interntask/collection/w6e3ol3/firestartertests?action=share&creator=34097842
 
 ## Альтернативный варинт проверки эндпоинтов
@@ -54,4 +54,5 @@ curl -k -X POST https://localhost:8081/upload \
 ```bash
 curl -k https://localhost:8081/status/ваш_хеш_файла
 ```
+
 
