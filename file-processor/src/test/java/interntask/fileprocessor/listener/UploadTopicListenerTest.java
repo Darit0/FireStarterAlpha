@@ -30,7 +30,7 @@ class UploadTopicListenerTest {
 
         when(validationService.validateFirstSheet(content)).thenReturn(true);
 
-        listener.listen(fileHash, content);
+        listener.listen(content, fileHash);
 
         verify(statusKafkaTemplate).send(eq("status-topic"), eq(fileHash), anyString());
 
@@ -43,7 +43,7 @@ class UploadTopicListenerTest {
 
         when(validationService.validateFirstSheet(content)).thenReturn(false);
 
-        listener.listen(fileHash, content);
+        listener.listen(content, fileHash);
 
         verify(statusKafkaTemplate).send(eq("status-topic"), eq(fileHash), anyString());
     }
@@ -55,7 +55,7 @@ class UploadTopicListenerTest {
 
         when(validationService.validateFirstSheet(content)).thenThrow(new RuntimeException("Boom!"));
 
-        listener.listen(fileHash, content);
+        listener.listen(content, fileHash);
 
         verify(statusKafkaTemplate).send(eq("status-topic"), eq(fileHash), anyString());
     }
